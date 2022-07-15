@@ -945,6 +945,12 @@ do while(totTime <= VarDischEndTime)
 4000        format(6f10.2)
         if(nct == 0) then
             solIndex = solIndex+1
+#if 5835
+            if(calcquasi3d.and.io_3doutput) then
+                ! Must be called before cg_iric_write_sol_time
+                call write_cgns3d_grid()
+            endif
+#endif
             CALL Calc_Area(x, y, xo, yo, nm, dn, harea)
             CALL CG_IRIC_WRITE_SOL_TIME(fid, tottime, ier)
             CALL Write_CGNS2(tottime, q)
@@ -957,6 +963,11 @@ do while(totTime <= VarDischEndTime)
                 !                    CAll Write_CGNS3D_SolGrid()
                 CALL Write_CGNS3D_FixedBed(solIndex, tottime, q)
             ENDIF
+#endif
+#if 5835
+            if(calcquasi3d.and.io_3doutput) then
+                call write_cgns3d_fixedbed(solindex, tottime, q)
+            endif
 #endif
 
         else
@@ -972,6 +983,11 @@ do while(totTime <= VarDischEndTime)
                     !                    ELSEIF(CALCQUASI3D.and.IO_3DOUTPUT.and.CALCCSED) THEN
                     !!                        CALL Write_CGNS3D_MoveableBed(tottime, q)
                 ENDIF
+#endif
+#if 5835
+                if(calcquasi3d.and.io_3doutput) then
+                    call write_cgns3d_fixedbed(solindex, tottime, q)
+                endif
 #endif
                 ptime = ptime+(iplinc*dt)
             endif
