@@ -118,7 +118,7 @@ jobs:
 
     - name: Debug build
       run: |
-        Set-Location ${{github.workspace}}/${{env.BUILD_DIR}}
+        Set-Location ${{github.workspace}}\${{env.BUILD_DIR}}\${{env.BUILD_TYPE}}
         Get-ChildItem *.exe, *.dll
 
     - name: Upload build
@@ -148,7 +148,7 @@ jobs:
     - name: Check for dumpbin
       if: ${{ always() }}
       run: |
-        Set-Location ${{github.workspace}}/${{env.BUILD_DIR}}
+        Set-Location ${{github.workspace}}\${{env.BUILD_DIR}}\${{env.BUILD_TYPE}}
         Get-ChildItem *.exe, *.dll
         Get-Command dumpbin
         dumpbin /IMPORTS *.exe *.dll
