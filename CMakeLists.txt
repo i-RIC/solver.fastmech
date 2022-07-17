@@ -110,6 +110,7 @@ if (WIN32)
     COMMAND ${CMAKE_COMMAND} -E copy_if_different "$<TARGET_FILE:szip-shared>"        "$<TARGET_FILE_DIR:Fastmech>"
     COMMAND ${CMAKE_COMMAND} -E copy_if_different "C:\\Program Files (x86)\\Intel\\oneAPI\\compiler\\2021.2.0\\windows\\redist\\intel64_win\\compiler\\$<IF:$<CONFIG:Release>,libifcoremd.dll,libifcoremdd.dll>" "$<TARGET_FILE_DIR:Fastmech>"
     COMMAND ${CMAKE_COMMAND} -E copy_if_different "C:\\Program Files (x86)\\Intel\\oneAPI\\compiler\\2021.2.0\\windows\\redist\\intel64_win\\compiler\\$<IF:$<CONFIG:Release>,libmmd.dll,libmmdd.dll>"           "$<TARGET_FILE_DIR:Fastmech>"
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different "C:\\Program Files (x86)\\Intel\\oneAPI\\compiler\\2021.2.0\\windows\\redist\\intel64_win\\compiler\\svml_dispmd.dll"                                          "$<TARGET_FILE_DIR:Fastmech>"
     )
 endif()
 
